@@ -229,12 +229,13 @@ int main() {
  //************* FUNCIONES A IMPLEMENTAR POR LOS ESTUDIANTES ***********
    
 Archivo crearArchivo(char * nombre){
-		
-		return NULL;
+    Archivo nuevo = crearArchivoVacio(nombre);
+	return nuevo;
 }
 
 TipoRet borrarArchivo(Archivo &a){
-		return NO_IMPLEMENTADA;
+	borrarArchivoCompleto(a);
+    return OK;
 }
 
 TipoRet crearVersion(Archivo &a, char * version){
