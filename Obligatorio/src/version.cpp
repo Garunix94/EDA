@@ -2,12 +2,13 @@
 
 #include "../include/version.h"
 #include <time.h>
+#include <string.h>
 
 
 struct _rep_version {
     char * numeroVersion;
     _rep_version * sig;
-
+    _rep_version * hijo;
 };
 
 //***********************  CONSTRUCTORAS ***************** */
@@ -17,12 +18,23 @@ Version crearVersionVacia(){
     Version nueva = new _rep_version();
     nueva->numeroVersion = 0;
     nueva->sig = NULL;
+    nueva->hijo = NULL;
     return nueva;
 }
 
 //Pre-Cond: No existe otra version en la estructura con nombre "nombreVersion"
 //Pos-Cond: Crea una nueva version de 
-void crearVersion (Version &version, char *num_version);
+void crearVersion (Version &version, char *num_version){
+    if (version == NULL) {
+        Version nueva = crearVersionVacia();
+        nueva->numeroVersion = num_version;
+        version = nueva;
+    }else if( strcmp(version->numeroVersion, num_version) < 0 ) {
+        crearVersion(version->hijo, num_version);
+    }else{
+        crearVersion(version->sig, num_version);
+    }
+}
 
 
 //************************ SELECTORAS ********************* */

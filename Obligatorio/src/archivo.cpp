@@ -23,7 +23,9 @@ Archivo crearArchivoVacio(char *nomArchivo){
 
 //Pre-Cond: No existe otra version en la estructura con nombre "nombreVersion"
 //Pos-Cond: Crea una nueva version de 
-void crearVersionArchivo (Archivo &archivo, char *numVersion);
+void crearVersionArchivo (Archivo &archivo, char *numVersion){
+    crearVersion(archivo->version, numVersion);
+}
 
 //Pre-Cond: No existe otra version en la estructura con nombre "nombreVersion"
 //Pos-Cond: Crea una nueva version de
