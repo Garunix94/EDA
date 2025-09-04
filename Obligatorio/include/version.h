@@ -42,6 +42,11 @@ void agregarFilaVersion (Version &version, char* numeroVersion, char *textoFila,
 //Pos-Cond: Imprime la Version "nombreVersion"
 void imprimirVersion(Version version, char* numeroVersion);
 
+/********************* AGREGADA *******************************/
+//Pre-Cond: La Version "version" es distinta de NULL
+//Pos-Cond:Retorna un puntero a la siguiente version
+Version siguienteVersion(Version &version);
+
 //********************* PREDICADOS ************************* */
 
 //Retorna true si la Version "version" no tiene texto
@@ -61,6 +66,13 @@ void eliminarLineaVersion (Version &version, char* numeroVersion, unsigned int n
 //Pos-Cond: elimina toda la mermoria reservada por "numeroVersion"
 //          y sus sub-versiones.
 void destruirVersion (Version &version, char* numeroVersion);
+
+
+
+/********************* AGREGADA *******************************/
+//Pre-condicion: No tiene
+//Por-condicion: Libera toda la memoria de Version
+void destruirVersionesTotales(Version &version);
 
 
 #endif

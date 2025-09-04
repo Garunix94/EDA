@@ -31,7 +31,7 @@ void versionIndependienteArchivo(Archivo &archivo, char *numVersion);
 //************************ SELECTORAS ********************* */
 
 //Pre-Cond: la version num_version existe en version
-//Pos-Cond: Retorna un puntero a la version de nombre "num_version"
+//Pos-Cond: Imprime las versiones del archivo segun descripcion de letra
 void mostrarVersionesArchivo(Archivo archivo);
 
 //Pre-cond: La version "version" tiene por lo menos "num_fila" de Filas
