@@ -92,25 +92,63 @@ char* obtenerTextoLinea (Linea linea, unsigned int numLinea){
     return A;
 }
 
-//*************************** PREDICADOS ********************** */
+bool esVaciaLinea(Linea linea){
+    return linea == NULL;
+}
 
-//Pos-Cond: retorna true si linea es vacía
-bool esVaciaLinea(Linea linea);
+bool existeNumeroLinea(Linea linea, unsigned int numLinea){
+    Linea aux;
+    aux = linea;
+    while (aux != NULL && linea->numLinea != numLinea) aux = aux->sig;
+    return aux->numLinea == numLinea;
+}
 
-//Pre-Cond: Retorna true si la Linea "numLinea" existe en la estructura "linea"
-bool existeNumeroLinea(Linea linea, unsigned int numLinea);
+bool sonIgualesLineas(Linea linea1, Linea linea2){
+    return sonIgualesCadenas(linea1->cadena, linea2->cadena);
+}
 
-//Pre-Cond: (esVaciaFila(fila1) && esVaciaFila(fila2)) retorna false
-//Pos-Cond: retorna true si fila1 tiene los mismos caracteres 
-//          y en el mismo orden que fila2
-bool sonIgualesLineas(Linea linea1, Linea linea2);
+void eliminarLinea(Linea &linea, unsigned int numLinea){
+    Linea aux;
+    aux = linea;
+    while (aux->numLinea != numLinea) aux = aux->sig;
+    destruirCadena(aux->cadena);
+    if (aux == linea && aux->sig == NULL){
+        delete linea;
+        linea = NULL;
+        aux = NULL;
+    }else if (aux == linea && aux->sig != NULL){
+        aux = aux->sig;
+        delete linea;
+        aux->sig = NULL;
+        linea = aux;
+    }else if (aux->sig == NULL){
+        aux->ant->sig = NULL;
+        delete aux;
+        aux = NULL;
+    }else{
+        aux->ant->sig = aux->sig;
+        aux->sig->ant = aux->ant;
+        Linea borrar;
+        borrar = aux;
+        aux = aux->sig;
+        delete borrar;
+    }
+    while (aux != NULL){
+        aux->numLinea--;
+        aux =aux->sig;
+    }
+}
 
-
-//***************************** DESTRUCTORAS **************** */
-
-//Pre-cond: la Linea "numLinea" existe en la Linea "linea"
-//Pos-Cond: elimina la Linea de la estructura "linea" de la posicion "numLinea"
-void eliminarLinea(Linea &linea, unsigned int numLinea);
-
-//Pos-Cond: elimina toda la memoria de la estructura Linea "linea"
-void destruirLinea(Linea &linea);
+void destruirLinea(Linea &linea){
+    Linea aux;
+    Linea borrar;
+    aux = linea;
+    while (aux->sig != NULL) aux = aux->sig;
+    while (aux != NULL){
+        borrar = aux;
+        destruirCadena(borrar->cadena);
+        aux =aux->ant;
+        delete borrar;
+    }
+    linea == NULL;
+}
