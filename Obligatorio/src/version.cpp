@@ -6,7 +6,7 @@
 
 
 struct _rep_version {
-    char * numeroVersion;
+    char * numero;
     _rep_version * sig;
     _rep_version * hijo;
 };
@@ -15,11 +15,7 @@ struct _rep_version {
 
 //Pos-Cond: Retorna una version vacia
 Version crearVersionVacia(){
-    Version nueva = new _rep_version();
-    nueva->numeroVersion = 0;
-    nueva->sig = NULL;
-    nueva->hijo = NULL;
-    return nueva;
+    return NULL;
 }
 
 //Pre-Cond: No existe otra version en la estructura con nombre "nombreVersion"
@@ -73,3 +69,15 @@ void eliminarLineaVersion (Version &version, char* numeroVersion, unsigned int n
 //Pos-Cond: elimina toda la mermoria reservada por "numeroVersion"
 //          y sus sub-versiones.
 void destruirVersion (Version &version, char* numeroVersion);
+
+
+//Pre-Cond: La version que se le pasa no es vacia
+//Pos-Cond: devuelve un intero con el nivel de version
+int nivelVersion(Version version){
+    int cont = 1;
+    for (int i = 0; version->numero[i] != '\0'; i++)
+    {
+        /* code */
+    }
+    
+}
