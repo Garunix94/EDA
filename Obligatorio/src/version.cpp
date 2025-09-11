@@ -45,7 +45,7 @@ void crearVersion (Version &version, char *num_version){
             version = nueva;
         }
     } else {
-        crearVersionVacia(version->sig, num_version);
+        crearVersion(version->sig, num_version);
     }
 }
 
