@@ -31,7 +31,6 @@ int nivelVersion(Version version){
     return cont;
 }
 
-//CORREGIR ERROR
 void crearVersion (Version &version, char *num_version){
     if (version == NULL || version->sig == NULL || strcmp(version->sig->num, num_version) > 0){
         Version nueva = new _rep_version();
@@ -118,4 +117,5 @@ void destruirTodasLasVersiones(Version &version){
         delete borrar;
         borrar = version;
     }
+    version = NULL;
 }
