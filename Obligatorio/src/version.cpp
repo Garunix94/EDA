@@ -48,7 +48,6 @@ void crearVersion (Version &version, char *num_version){
     }
 }
 
-
 Version obtenerVersion(Version &version, char *numVersion){
     if (version->num == numVersion){
         Version nueva = version;

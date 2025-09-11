@@ -239,27 +239,39 @@ TipoRet borrarArchivo(Archivo &a){
 }
 
 TipoRet crearVersion(Archivo &a, char * version){
-		return NO_IMPLEMENTADA;
+    crearVersionArchivo (a, version);	
+	return OK;
 }
 
 TipoRet borrarVersion(Archivo &a, char * version){
-		return NO_IMPLEMENTADA;
+    return NO_IMPLEMENTADA;
 }
 
 TipoRet mostrarVersiones(Archivo a){
-		return NO_IMPLEMENTADA;
+    mostrarVersionesArchivo(a);
+	return OK;
 }
 
 TipoRet insertarLinea(Archivo &a, char * version, char * linea, unsigned int nroLinea){ 
-		return NO_IMPLEMENTADA;
+	if (existeVersionEnArchivo(a, version)){
+        insertarLineaVersionDeArchivo(a, version, linea, nroLinea);
+        return OK;
+    } else {
+        return ERROR;
+    }
 }
 
 TipoRet borrarLinea(Archivo &a, char * version, unsigned int nroLinea){
-		return NO_IMPLEMENTADA;
+	return NO_IMPLEMENTADA;
 }
 
 TipoRet mostrarTexto(Archivo a, char * version){
-		return NO_IMPLEMENTADA;
+	if (existeVersionEnArchivo(a, version)){
+        mostrarTextoArchivoVersion(a, version);
+        return OK;
+    } else{
+        return ERROR;
+    }   
 }
 
 TipoRet mostrarCambios(Archivo a, char * version){

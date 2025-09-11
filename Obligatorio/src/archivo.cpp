@@ -27,7 +27,9 @@ void crearVersionArchivo (Archivo &archivo, char *numVersion){
 void versionIndependienteArchivo(Archivo &archivo, char *numVersion);
 
 //PARECE QUE FALTA UNA FUNCION EN VERSION
-void mostrarVersionesArchivo(Archivo archivo);
+void mostrarVersionesArchivo(Archivo archivo){
+    std::cout << "Nada de nada" << std::endl;
+}
 
 void insertarLineaVersionDeArchivo (Archivo &archivo, char* numeroVersion, char *textoFila,unsigned int numFila){
     agregarFilaVersion(archivo->version, numeroVersion, textoFila, numFila);
