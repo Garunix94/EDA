@@ -1,83 +1,121 @@
 /* 5512649 */ // sustituiir con los 7 dígitos de la cédula
 
 #include "../include/version.h"
+#include "../include/linea.h"
 #include <time.h>
+#include <iostream>
 #include <string.h>
 
 
 struct _rep_version {
-    char * numero;
+    char * num;
+    int nivel;
+    int cantLineas;
+    Linea linea;
     _rep_version * sig;
     _rep_version * hijo;
 };
 
-//***********************  CONSTRUCTORAS ***************** */
 
-//Pos-Cond: Retorna una version vacia
+
 Version crearVersionVacia(){
     return NULL;
 }
 
-//Pre-Cond: No existe otra version en la estructura con nombre "nombreVersion"
-//Pos-Cond: Crea una nueva version de 
+//FUNCION AUXILIAR
+int nivelVersion(Version version){
+    int cont = 1;
+    for (int i = 0; version->num[i] != '\0'; i++){
+        if (version->num[i] == '.') cont++;       
+    }
+    return cont;
+}
+
+//CORREGIR ERROR
 void crearVersion (Version &version, char *num_version){
-    if (version == NULL) {
-        Version nueva = crearVersionVacia();
-        nueva->numeroVersion = num_version;
-        version = nueva;
-    }else if( strcmp(version->numeroVersion, num_version) < 0 ) {
-        crearVersion(version->hijo, num_version);
-    }else{
-        crearVersion(version->sig, num_version);
+    if (version == NULL || version->sig == NULL || strcmp(version->sig->num, num_version) > 0){
+        Version nueva = new _rep_version();
+        strcpy(nueva->num, num_version);
+        nueva->nivel = nivelVersion(nueva);
+        nueva->cantLineas = 0;
+        nueva->linea = crearLineaVacia();
+        if (version == NULL) version =nueva;
+        else if (strcmp(version->num, num_version) < 0) {
+            nueva->sig = version->sig;
+            version = nueva;
+        }
+    } else {
+        crearVersionVacia(version->sig, num_version);
     }
 }
 
 
-//************************ SELECTORAS ********************* */
-
-//Pre-Cond: la version numVersion existe en version
-//Pos-Cond: Retorna un puntero a la version de nombre "numVersion"
-Version obtenerVersion(Version &version, char *numVersion);
-
-//Pre-cond: La version "version" tiene por lo menos "numLinea" de Lineas
-//Pos-Cond: Agrega el string texto como la fila num_fila de la Version "version"
-//          Las filas debajo de num_filas se renumeran como numLinea=numLinea+1
-void agregarFilaVersion (Version &version, char* numeroVersion, char *textoFila,unsigned int numLinea);
-
-
-
-//Pre-Cond: existeVersion(version, numeroVersion) retorna true.
-//Pos-Cond: Imprime la Version "nombreVersion"
-void imprimirVersion(Version version, char* numeroVersion);
-
-//********************* PREDICADOS ************************* */
-
-//Retorna true si la Version "version" no tiene texto
-bool esVaciaVersion (Version version, char* numeroVersion);
-
-//Retorna true si la Version "numeroVersion" existe en "version"
-bool existeVersion (Version version, char* numeroVersion);
-
-//****************  DESTRUCTORAS ***********************
-
-//Pre-Cond: la Linea "numLinea" existe en la version "version"
-//Pos-Cond: se elimina la Linea de la posicion "numLinea"
-//          el resto de las Lineas debajo se renumeran como numLinea=numLinea-1
-void eliminarLineaVersion (Version &version, char* numeroVersion, unsigned int numLinea);
-
-//Pre-Cond: la version "numeroVersion" existe en version
-//Pos-Cond: elimina toda la mermoria reservada por "numeroVersion"
-//          y sus sub-versiones.
-void destruirVersion (Version &version, char* numeroVersion);
-
-
-//Pre-Cond: La version que se le pasa no es vacia
-//Pos-Cond: devuelve un intero con el nivel de version
-int nivelVersion(Version version){
-    int cont = 1;
-    for (int i = 0; version->numero[i] != '\0'; i++)
-    {
-        /* code */
+Version obtenerVersion(Version &version, char *numVersion){
+    if (version->num == numVersion){
+        Version nueva = version;
+        return nueva;
+    } else {
+        return obtenerVersion(version->sig, numVersion);
     }
-    
+}
+
+void agregarFilaVersion (Version &version, char* numeroVersion, char *textoFila,unsigned int numLinea){
+    Version insertar = obtenerVersion(version, numeroVersion);
+    insertarLinea(insertar->linea, textoFila, numLinea);
+}
+
+void imprimirVersion(Version version, char* numeroVersion){
+    Version res = obtenerVersion(version, numeroVersion);
+    Linea aux = res->linea;
+    while (!esVaciaLinea(aux)){
+        char* A = obtenerTextoLinea(aux, getNumeroLinea(aux));
+        std::cout << A << std::endl;
+        aux = siguienteLinea(aux);
+    }
+}
+
+Version siguienteVersion(Version version){
+    return version->sig;
+}
+
+char* nombreVersion(Version version){
+    char* A = version->num;
+    return A;
+}
+
+bool esVaciaVersion (Version version, char* numeroVersion){
+    Version res = obtenerVersion(version, numeroVersion);
+    return esVaciaLinea(res->linea);
+}
+
+bool existeVersion (Version version, char* numeroVersion){
+    while (version != NULL){
+        int condicion = strcmp(version->num, numeroVersion);
+        if (condicion == 0) return true;
+        version = siguienteVersion(version);        
+    }
+    return version != NULL;
+}
+
+void eliminarLineaVersion (Version &version, char* numeroVersion, unsigned int numLinea){
+    Version aux = version;
+    aux = obtenerVersion(aux, numeroVersion);
+    eliminarLinea(aux->linea, numLinea);
+}
+
+void destruirVersion (Version &version, char* numeroVersion){
+    Version borrar = version;
+    borrar = obtenerVersion(borrar, numeroVersion);
+    destruirLinea(borrar->linea);
+    delete borrar;
+}
+
+void destruirTodasLasVersiones(Version &version){
+    Version borrar = version;
+    while (version != NULL){
+        version = version->sig;
+        destruirLinea(borrar->linea);
+        delete borrar;
+        borrar = version;
+    }
 }
