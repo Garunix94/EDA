@@ -8,15 +8,10 @@ struct _rep_cadena {
     _rep_cadena * sig;
 };
 
-/* Operaciones de Cadena */
-
-//Pos-Cond: retorna una cadena de caracteres vacia
 Cadena crearCadenaVacia(){
     return NULL;
 }
 
-//Pre-Cond: esVaciaCadenaCaracteres(cadena)retorna true.
-//Pos-Cond: agrega los caracteres de cadena a la fila vaica "fila"
 void agregarCaracteresCadena(Cadena &cadena, char* texto){
     int i = 0;
     while (texto[i] != '\0'){
@@ -37,12 +32,10 @@ void agregarCaracteresCadena(Cadena &cadena, char* texto){
     }
 }
 
-//retorna true si la cadena es vacia
 bool esVaciaCadenaCaracteres (Cadena cadena){
     return cadena == NULL;
 }
 
-//retorna true si la cadena1 es igual a la cadena2, false en caso contrario
 bool sonIgualesCadenas(Cadena cadena1, Cadena cadena2){
     Cadena it1 = cadena1;
     Cadena it2 = cadena2;
@@ -53,8 +46,6 @@ bool sonIgualesCadenas(Cadena cadena1, Cadena cadena2){
     return it1 == NULL && it2 == NULL;
 }
 
-//retorna el dato char* de la tupla tup
-//pre-cond retorna un puntero a un arreglo dinamico 
 char* convertirCadenaArregloChar(Cadena cadena){
     char* A;
     int i = 0;
@@ -68,7 +59,6 @@ char* convertirCadenaArregloChar(Cadena cadena){
     return A;
 }
 
-//Pos-Cond: libera toda la memoria de cadena
 void destruirCadena (Cadena &cadena){
     Cadena borrar = cadena;
     while (cadena != NULL) {

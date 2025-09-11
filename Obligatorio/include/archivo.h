@@ -31,7 +31,7 @@ void versionIndependienteArchivo(Archivo &archivo, char *numVersion);
 //************************ SELECTORAS ********************* */
 
 //Pre-Cond: la version num_version existe en version
-//Pos-Cond: Imprime las versiones del archivo segun descripcion de letra
+//Pos-Cond: Retorna un puntero a la version de nombre "num_version"
 void mostrarVersionesArchivo(Archivo archivo);
 
 //Pre-cond: La version "version" tiene por lo menos "num_fila" de Filas
@@ -46,11 +46,17 @@ void borrarLineaVersionArchivo (Archivo &archivo, char* numeroVersion, unsigned 
 
 //Pre-Cond: la version nombre_version existe en Version
 //Pos-Cond: Imprime la Version "nombre_version"
-void imprimirVersionArchivo (Archivo version, char* numeroVersion);
+void imprimirVersionArchivo (Archivo archivo, char* numeroVersion);
 
 //Pre-Cond: Tiene version padre.
 //Pos-Cond: Imprime los cambios realizados en la version numeroVersion con respecto al padre.
 void mostrarCambiosArchivo (Archivo archivo, char* numeroVersion);
+
+
+//***************************** AGREGADA 11/05/2025 *******************
+//Pre-Cond: La Version "numeroVersion" existe en el Archivo "archivo".
+//Pos-Cond: Imprime el texto correspondiente a la version "numeroVersion"
+void mostrarTextoArchivoVersion (Archivo archivo, char* numeroVersion);
 
 //********************* PREDICADOS ************************* */
 
@@ -61,6 +67,9 @@ bool igualesVersionesArchivo (Archivo archivo, char* numeroVersion1, char* numer
 
 
 
+//***********************************AGREGADA 11/09/2025 **********************
+//Pre-Cond: No tiene
+//Pos-Cond: Retorna true si la Version "numeroVersion" existe en el Archivo "archivo"
 bool existeVersionEnArchivo(Archivo archivo, char* numeroVersion);
 
 

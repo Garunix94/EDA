@@ -36,16 +36,21 @@ Version obtenerVersion(Version &version, char *numVersion);
 //          Las filas debajo de num_filas se renumeran como numLinea=numLinea+1
 void agregarFilaVersion (Version &version, char* numeroVersion, char *textoFila,unsigned int numLinea);
 
-
-
 //Pre-Cond: existeVersion(version, numeroVersion) retorna true.
 //Pos-Cond: Imprime la Version "nombreVersion"
 void imprimirVersion(Version version, char* numeroVersion);
 
-/********************* AGREGADA *******************************/
-//Pre-Cond: La Version "version" es distinta de NULL
-//Pos-Cond:Retorna un puntero a la siguiente version
-Version siguienteVersion(Version &version);
+
+////////////////////////////////// AGREGADA 05/09/2025  ////////////
+//Pre-Cond: version != NULL
+//Pos-Cond: retorna un puntero a la siguiente Version de "version"
+Version siguienteVersion(Version version);
+
+////////////////////////////////// AGREGADA 05/09/2025  ////////////
+//Pre-Cond: version !=NULL
+//Pos-Cond: retorna un puntero a un arreglo dinamico con el numero de la Version "version"
+char* nombreVersion(Version version);
+
 
 //********************* PREDICADOS ************************* */
 
@@ -67,12 +72,10 @@ void eliminarLineaVersion (Version &version, char* numeroVersion, unsigned int n
 //          y sus sub-versiones.
 void destruirVersion (Version &version, char* numeroVersion);
 
-
-
-/********************* AGREGADA *******************************/
-//Pre-condicion: No tiene
-//Por-condicion: Libera toda la memoria de Version
-void destruirVersionesTotales(Version &version);
+////////////////////////////////// AGREGADA 05/09/2025  ////////////
+//Pre-Cond: No tiene
+//Pos-Cond: Elimina toda la memoria reservada por "version"
+void destruirTodasLasVersiones(Version &version);
 
 
 #endif
