@@ -57,7 +57,11 @@ void mostrarCambiosArchivo (Archivo archivo, char* numeroVersion);
 
 
 //Retorna true si la Version "numeroVersion" existe en "version"
-bool igualesVersionesArchivo (Archivo version, char* numeroVersion1, char* numeroVersion2);
+bool igualesVersionesArchivo (Archivo archivo, char* numeroVersion1, char* numeroVersion2);
+
+
+
+bool existeVersionEnArchivo(Archivo archivo, char* numeroVersion);
 
 
 //****************  DESTRUCTORAS ***********************
