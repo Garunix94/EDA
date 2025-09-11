@@ -61,7 +61,6 @@ void insertarLinea(Linea &linea, char* texto, unsigned int numLinea){
     }
 }
 
-
 Linea siguienteLinea(Linea linea){
     return linea->sig;
 }
