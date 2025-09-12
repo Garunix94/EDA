@@ -1,7 +1,7 @@
 /* 5512649 */ 
 
 #include <time.h>
-#include <iostream>
+#include <stdio.h>
 #include "../include/archivo.h"
 #include "../include/version.h"
 
@@ -28,7 +28,8 @@ void versionIndependienteArchivo(Archivo &archivo, char *numVersion);
 
 //PARECE QUE FALTA UNA FUNCION EN VERSION
 void mostrarVersionesArchivo(Archivo archivo){
-    std::cout << "Nada de nada" << std::endl;
+    printf("%s\n\n", archivo->nombreArchivo);
+    imprimirNumeroVersion(archivo->version);
 }
 
 void insertarLineaVersionDeArchivo (Archivo &archivo, char* numeroVersion, char *textoFila,unsigned int numFila){
@@ -40,6 +41,7 @@ void borrarLineaVersionArchivo (Archivo &archivo, char* numeroVersion, unsigned 
 }
 
 void imprimirVersionArchivo (Archivo archivo, char* numeroVersion){
+    printf("%s\n\n", archivo->nombreArchivo);
     imprimirVersion(archivo->version, numeroVersion);
 }
 

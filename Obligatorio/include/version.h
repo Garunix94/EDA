@@ -78,4 +78,13 @@ void destruirVersion (Version &version, char* numeroVersion);
 void destruirTodasLasVersiones(Version &version);
 
 
+
+
+
+//Funciones creadas por mi porque sino seria imposible hacer el obligatorio
+
+//Pre-codicion: No tiene
+//Pos-condicion: Imprime toda la lista de numero de versiones a la que apunta "version"
+void imprimirNumeroVersion(Version version);
+
 #endif

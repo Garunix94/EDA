@@ -3,14 +3,13 @@
 #include "../include/version.h"
 #include "../include/linea.h"
 #include <time.h>
-#include <iostream>
 #include <string.h>
+#include <stdio.h>
 
 
 struct _rep_version {
     char * num;
     int nivel;
-    int cantLineas;
     Linea linea;
     _rep_version * sig;
     _rep_version * hijo;
@@ -32,20 +31,20 @@ int nivelVersion(Version version){
 }
 
 void crearVersion (Version &version, char *num_version){
-    if (version == NULL || version->sig == NULL || strcmp(version->sig->num, num_version) > 0){
+    if (version == NULL) {
         Version nueva = new _rep_version();
-        strcpy(nueva->num, num_version);
+        nueva->num = num_version;
         nueva->nivel = nivelVersion(nueva);
-        nueva->cantLineas = 0;
         nueva->linea = crearLineaVacia();
-        if (version == NULL) version =nueva;
-        else if (strcmp(version->num, num_version) < 0) {
-            nueva->sig = version->sig;
-            version = nueva;
-        }
+        nueva->sig = NULL;
+        nueva->hijo = NULL;
+        version = nueva;
     } else {
         crearVersion(version->sig, num_version);
     }
+    
+    
+    
 }
 
 Version obtenerVersion(Version &version, char *numVersion){
@@ -67,7 +66,8 @@ void imprimirVersion(Version version, char* numeroVersion){
     Linea aux = res->linea;
     while (!esVaciaLinea(aux)){
         char* A = obtenerTextoLinea(aux, getNumeroLinea(aux));
-        std::cout << A << std::endl;
+        //std::cout << A << std::endl;
+        printf("%s", A);
         aux = siguienteLinea(aux);
     }
 }
@@ -118,3 +118,45 @@ void destruirTodasLasVersiones(Version &version){
     }
     version = NULL;
 }
+
+//Funciones creadas por mi porque sino seria imposible hacer el obligatorio
+
+//Pre-codicion: No tiene
+//Pos-condicion: Imprime toda la lista de numero de versiones a la que apunta "version"
+void imprimirNumeroVersion(Version version){
+    if (version == NULL)
+        printf("No hay versiones creadas\n");
+    else{
+        while (version != NULL){
+            printf("%s\n", version->num);
+            version = siguienteVersion(version);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* cAMBIARE TODO ESTE CODIGO POR UNO ITERATIVO MIENTRAS
+void crearVersion (Version &version, char *num_version){
+    if (version == NULL || version->sig == NULL || strcmp(version->sig->num, num_version) > 0){
+        Version nueva = new _rep_version();
+        nueva->num = num_version;
+        nueva->nivel = nivelVersion(nueva);
+        nueva->linea = crearLineaVacia();
+        if (version == NULL) version =nueva;
+        else if (strcmp(version->num, num_version) < 0) {
+            nueva->sig = version->sig;
+            version->sig = nueva;
+        }
+    } else {
+        crearVersion(version->sig, num_version);
+    }
+}
+*/

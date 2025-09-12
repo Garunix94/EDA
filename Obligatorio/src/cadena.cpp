@@ -17,7 +17,7 @@ void agregarCaracteresCadena(Cadena &cadena, char* texto){
     while (texto[i] != '\0'){
         Cadena nuevo = new _rep_cadena();
         nuevo->letra = texto[i];
-        nuevo->sig == NULL;
+        nuevo->sig = NULL;
         if (cadena == NULL) {
             cadena = nuevo;
             i++;
@@ -48,6 +48,7 @@ bool sonIgualesCadenas(Cadena cadena1, Cadena cadena2){
 
 char* convertirCadenaArregloChar(Cadena cadena){
     char* A;
+    A = new char[100];
     int i = 0;
     Cadena iterador = cadena;
     while (iterador != NULL) {

@@ -149,5 +149,5 @@ void destruirLinea(Linea &linea){
         aux =aux->ant;
         delete borrar;
     }
-    linea == NULL;
+    linea = NULL;
 }
