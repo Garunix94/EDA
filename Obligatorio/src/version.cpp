@@ -9,7 +9,6 @@
 
 struct _rep_version {
     char * num;
-    int nivel;
     Linea linea;
     _rep_version * sig;
     _rep_version * hijo;
@@ -21,29 +20,24 @@ Version crearVersionVacia(){
     return NULL;
 }
 
-//FUNCION AUXILIAR
-int nivelVersion(Version version){
-    int cont = 1;
-    for (int i = 0; version->num[i] != '\0'; i++){
-        if (version->num[i] == '.') cont++;       
-    }
-    return cont;
-}
+
 
 void crearVersion (Version &version, char *num_version){
-    if (version == NULL) {
-        Version nueva = new _rep_version();
-        nueva->num = num_version;
-        nueva->nivel = nivelVersion(nueva);
-        nueva->linea = crearLineaVacia();
-        nueva->sig = NULL;
-        nueva->hijo = NULL;
+    Version nueva = new _rep_version();
+    nueva->num = num_version;
+    nueva->linea = NULL;
+    nueva->hijo = NULL;
+    nueva->sig = NULL;
+
+    if (version == NULL){
         version = nueva;
-    } else {
-        crearVersion(version->sig, num_version);
+    } else{
+        Version aux = version;
+        while(aux->sig != NULL){
+            aux = aux->sig;
+        }
+        aux->sig = nueva;
     }
-    
-    
     
 }
 
@@ -77,13 +71,13 @@ Version siguienteVersion(Version version){
 }
 
 char* nombreVersion(Version version){
-    char* A = version->num;
+    char* A = new char[20];
+    A = version->num;
     return A;
 }
 
 bool esVaciaVersion (Version version, char* numeroVersion){
-    Version res = obtenerVersion(version, numeroVersion);
-    return esVaciaLinea(res->linea);
+    return version->linea == NULL;
 }
 
 bool existeVersion (Version version, char* numeroVersion){
@@ -121,15 +115,15 @@ void destruirTodasLasVersiones(Version &version){
 
 //Funciones creadas por mi porque sino seria imposible hacer el obligatorio
 
-//Pre-codicion: No tiene
+//Pre-codicion: El puntero "version" no es vacio
 //Pos-condicion: Imprime toda la lista de numero de versiones a la que apunta "version"
 void imprimirNumeroVersion(Version version){
-    if (version == NULL)
-        printf("No hay versiones creadas\n");
+    if (version->sig != NULL)
+        printf("%s\n", version->num);
     else{
         while (version != NULL){
             printf("%s\n", version->num);
-            version = siguienteVersion(version);
+            imprimirNumeroVersion(version->sig);
         }
     }
 }
@@ -158,5 +152,48 @@ void crearVersion (Version &version, char *num_version){
     } else {
         crearVersion(version->sig, num_version);
     }
+}
+
+void crearVersion (Version &version, char *num_version){
+    if (version == NULL) {
+        Version nueva = new _rep_version();
+        nueva->num = num_version;
+        nueva->nivel = nivelVersion(nueva);
+        nueva->linea = crearLineaVacia();
+        nueva->sig = NULL;
+        nueva->hijo = NULL;
+        version = nueva;
+    } else {
+        crearVersion(version->sig, num_version);
+    }  
+}
+
+
+
+    Version aux = version;
+    Version nueva = new _rep_version();
+    nueva->num = num_version;
+    nueva->nivel = nivelVersion(aux);
+    nueva->linea = NULL;
+    nueva->hijo = NULL;
+    nueva->sig = NULL;
+
+    if (version == NULL){
+        version = nueva;
+    }else{
+        while (aux->sig != NULL){
+            aux = aux->sig;
+        }
+        aux->sig = nueva;
+    }
+
+
+//FUNCION AUXILIAR
+int nivelVersion(Version version){
+    int cont = 1;
+    for (int i = 0; version->num[i] != '\0'; i++){
+        if (version->num[i] == '.') cont++;       
+    }
+    return cont;
 }
 */

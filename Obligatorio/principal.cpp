@@ -1,4 +1,4 @@
-/* 1111111 */ // sustituir con los 7 dígitos de la cédula
+/* 5512649 */ // sustituir con los 7 dígitos de la cédula
 
 /* Módulo principal de la tarea de EDA
 
@@ -239,7 +239,7 @@ TipoRet borrarArchivo(Archivo &a){
 }
 
 TipoRet crearVersion(Archivo &a, char * version){
-    crearVersionArchivo (a, version);	
+    crearVersionArchivo (a, version);
 	return OK;
 }
 

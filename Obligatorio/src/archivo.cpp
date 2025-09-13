@@ -29,7 +29,11 @@ void versionIndependienteArchivo(Archivo &archivo, char *numVersion);
 //PARECE QUE FALTA UNA FUNCION EN VERSION
 void mostrarVersionesArchivo(Archivo archivo){
     printf("%s\n\n", archivo->nombreArchivo);
-    imprimirNumeroVersion(archivo->version);
+    Version aux = archivo->version;
+    while (aux != NULL){
+        printf("%s\n", nombreVersion(aux));
+        aux = siguienteVersion(aux);
+    }
 }
 
 void insertarLineaVersionDeArchivo (Archivo &archivo, char* numeroVersion, char *textoFila,unsigned int numFila){
@@ -50,6 +54,7 @@ void mostrarCambiosArchivo (Archivo archivo, char* numeroVersion);
 
 void mostrarTextoArchivoVersion (Archivo archivo, char* numeroVersion){
     imprimirVersion(archivo->version, numeroVersion);
+    imprimirNumeroVersion(archivo->version);
 }
 
 //FALTA IMPLEMENTAR OJOOOO
