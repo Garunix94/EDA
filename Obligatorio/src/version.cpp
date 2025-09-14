@@ -22,27 +22,23 @@ Version crearVersionVacia(){
 
 
 
-void crearVersion (Version &version, char *num_version){
-    Version nueva = new _rep_version();
-    nueva->num = num_version;
-    nueva->linea = NULL;
-    nueva->hijo = NULL;
-    nueva->sig = NULL;
 
-    if (version == NULL){
-        version = nueva;
-    } else{
-        Version aux = version;
-        while(aux->sig != NULL){
-            aux = aux->sig;
-        }
-        aux->sig = nueva;
+void crearVersion(Version &version, char *num_version){
+    if (version == NULL || strcmp(num_version, version->num) < 0) {
+        Version nuevo = new _rep_version;
+        nuevo->num = new char[15];
+        strcpy(nuevo->num, num_version);
+        nuevo->linea = crearLineaVacia();
+        nuevo->sig = version;
+        nuevo->hijo = NULL;
+        version = nuevo;
+    }else{
+        crearVersion(version->sig, num_version);
     }
-    
 }
 
 Version obtenerVersion(Version &version, char *numVersion){
-    if (version->num == numVersion){
+    if (strcmp(version->num, numVersion) == 0){
         Version nueva = version;
         return nueva;
     } else {
@@ -72,7 +68,7 @@ Version siguienteVersion(Version version){
 
 char* nombreVersion(Version version){
     char* A = new char[20];
-    A = version->num;
+    strcpy(A, version->num);
     return A;
 }
 
@@ -113,47 +109,8 @@ void destruirTodasLasVersiones(Version &version){
     version = NULL;
 }
 
-//Funciones creadas por mi porque sino seria imposible hacer el obligatorio
 
-//Pre-codicion: El puntero "version" no es vacio
-//Pos-condicion: Imprime toda la lista de numero de versiones a la que apunta "version"
-void imprimirNumeroVersion(Version version){
-    if (version->sig != NULL)
-        printf("%s\n", version->num);
-    else{
-        while (version != NULL){
-            printf("%s\n", version->num);
-            imprimirNumeroVersion(version->sig);
-        }
-    }
-}
-
-
-
-
-
-
-
-
-
-
-/* cAMBIARE TODO ESTE CODIGO POR UNO ITERATIVO MIENTRAS
-void crearVersion (Version &version, char *num_version){
-    if (version == NULL || version->sig == NULL || strcmp(version->sig->num, num_version) > 0){
-        Version nueva = new _rep_version();
-        nueva->num = num_version;
-        nueva->nivel = nivelVersion(nueva);
-        nueva->linea = crearLineaVacia();
-        if (version == NULL) version =nueva;
-        else if (strcmp(version->num, num_version) < 0) {
-            nueva->sig = version->sig;
-            version->sig = nueva;
-        }
-    } else {
-        crearVersion(version->sig, num_version);
-    }
-}
-
+/*
 void crearVersion (Version &version, char *num_version){
     if (version == NULL) {
         Version nueva = new _rep_version();
@@ -167,25 +124,6 @@ void crearVersion (Version &version, char *num_version){
         crearVersion(version->sig, num_version);
     }  
 }
-
-
-
-    Version aux = version;
-    Version nueva = new _rep_version();
-    nueva->num = num_version;
-    nueva->nivel = nivelVersion(aux);
-    nueva->linea = NULL;
-    nueva->hijo = NULL;
-    nueva->sig = NULL;
-
-    if (version == NULL){
-        version = nueva;
-    }else{
-        while (aux->sig != NULL){
-            aux = aux->sig;
-        }
-        aux->sig = nueva;
-    }
 
 
 //FUNCION AUXILIAR

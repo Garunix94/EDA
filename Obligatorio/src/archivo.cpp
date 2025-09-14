@@ -26,13 +26,16 @@ void crearVersionArchivo (Archivo &archivo, char *numVersion){
 //NO ENTIENDO DIFERENECIA CON FUNCION ANTERIOR
 void versionIndependienteArchivo(Archivo &archivo, char *numVersion);
 
-//PARECE QUE FALTA UNA FUNCION EN VERSION
 void mostrarVersionesArchivo(Archivo archivo){
     printf("%s\n\n", archivo->nombreArchivo);
-    Version aux = archivo->version;
-    while (aux != NULL){
-        printf("%s\n", nombreVersion(aux));
-        aux = siguienteVersion(aux);
+    if (archivo->version == NULL){
+        printf("No hay versiones creadas\n");
+    } else {
+        Version aux = archivo->version;
+        while (aux != NULL){
+            printf("%s\n", nombreVersion(aux));
+            aux = siguienteVersion(aux);
+        }
     }
 }
 
@@ -54,7 +57,7 @@ void mostrarCambiosArchivo (Archivo archivo, char* numeroVersion);
 
 void mostrarTextoArchivoVersion (Archivo archivo, char* numeroVersion){
     imprimirVersion(archivo->version, numeroVersion);
-    imprimirNumeroVersion(archivo->version);
+    //imprimirNumeroVersion(archivo->version);
 }
 
 //FALTA IMPLEMENTAR OJOOOO

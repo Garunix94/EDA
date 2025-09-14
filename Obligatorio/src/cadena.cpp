@@ -1,7 +1,8 @@
-/* 5512649 */ // sustituiir con los 7 dígitos de la cédula
+/* 5512649 */
 
 #include "../include/cadena.h"
 #include "time.h"
+#include <stdio.h>
 
 struct _rep_cadena {
     char letra;
