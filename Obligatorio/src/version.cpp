@@ -57,7 +57,7 @@ void imprimirVersion(Version version, char* numeroVersion){
     while (!esVaciaLinea(aux)){
         char* A = obtenerTextoLinea(aux, getNumeroLinea(aux));
         //std::cout << A << std::endl;
-        printf("%s", A);
+        printf("%s\n", A);
         aux = siguienteLinea(aux);
     }
 }

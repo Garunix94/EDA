@@ -56,8 +56,10 @@ void imprimirVersionArchivo (Archivo archivo, char* numeroVersion){
 void mostrarCambiosArchivo (Archivo archivo, char* numeroVersion);
 
 void mostrarTextoArchivoVersion (Archivo archivo, char* numeroVersion){
+    Version num = obtenerVersion(archivo->version, numeroVersion);
+    printf("%s - %s\n\n", archivo->nombreArchivo, nombreVersion(num));
+    
     imprimirVersion(archivo->version, numeroVersion);
-    //imprimirNumeroVersion(archivo->version);
 }
 
 //FALTA IMPLEMENTAR OJOOOO
