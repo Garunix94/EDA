@@ -48,16 +48,26 @@ Version obtenerVersion(Version &version, char *numVersion){
 
 void agregarFilaVersion (Version &version, char* numeroVersion, char *textoFila,unsigned int numLinea){
     Version insertar = obtenerVersion(version, numeroVersion);
-    insertarLinea(insertar->linea, textoFila, numLinea);
+    
+    //FALTA TERMINAR DE IMPLEMENTAR
+    //Verificar como hacer para que no deje huecos
+    if (numLinea > cantidadLineas(insertar->linea) || esVaciaLinea(insertar->linea)){
+        insertarLinea(insertar->linea, textoFila, numLinea);
+    }else{
+        printf("Nopeee");
+    }
+    
 }
 
 void imprimirVersion(Version version, char* numeroVersion){
     Version res = obtenerVersion(version, numeroVersion);
     Linea aux = res->linea;
+    int renglon = 1;
     while (!esVaciaLinea(aux)){
         char* A = obtenerTextoLinea(aux, getNumeroLinea(aux));
-        //std::cout << A << std::endl;
-        printf("%s\n", A);
+        //std::cout << A << std::endl; 
+        printf("%d>     %s\n",renglon, A);
+        renglon++;
         aux = siguienteLinea(aux);
     }
 }

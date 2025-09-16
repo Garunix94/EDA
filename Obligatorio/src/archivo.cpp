@@ -33,6 +33,12 @@ void mostrarVersionesArchivo(Archivo archivo){
     } else {
         Version aux = archivo->version;
         while (aux != NULL){
+            char* A = nombreVersion(aux);
+            for (int i = 0; A[i] != '\0'; i++){
+                if (A[i] == '.'){
+                    printf("    ");
+                }
+            }    
             printf("%s\n", nombreVersion(aux));
             aux = siguienteVersion(aux);
         }
@@ -58,7 +64,6 @@ void mostrarCambiosArchivo (Archivo archivo, char* numeroVersion);
 void mostrarTextoArchivoVersion (Archivo archivo, char* numeroVersion){
     Version num = obtenerVersion(archivo->version, numeroVersion);
     printf("%s - %s\n\n", archivo->nombreArchivo, nombreVersion(num));
-    
     imprimirVersion(archivo->version, numeroVersion);
 }
 
