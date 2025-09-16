@@ -71,12 +71,12 @@ Linea anteriorLinea(Linea linea){
 }
 
 unsigned int cantidadLineas(Linea linea){
-    Linea aux = linea;
     unsigned int i = 0;
-    while (aux != NULL){
-        aux = aux->sig;
+    while (linea != NULL){
+        linea = linea->sig;
         i++;
     }
+    printf("Conte %d lineas\n", i);
     return i;
 }
 

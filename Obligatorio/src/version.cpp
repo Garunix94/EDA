@@ -51,7 +51,7 @@ void agregarFilaVersion (Version &version, char* numeroVersion, char *textoFila,
     
     //FALTA TERMINAR DE IMPLEMENTAR
     //Verificar como hacer para que no deje huecos
-    if (numLinea > cantidadLineas(insertar->linea) || esVaciaLinea(insertar->linea)){
+    if (numLinea < cantidadLineas(insertar->linea) || esVaciaLinea(insertar->linea)){
         insertarLinea(insertar->linea, textoFila, numLinea);
     }else{
         printf("Nopeee");
