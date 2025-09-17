@@ -76,7 +76,6 @@ unsigned int cantidadLineas(Linea linea){
         linea = linea->sig;
         i++;
     }
-    printf("Conte %d lineas\n", i);
     return i;
 }
 

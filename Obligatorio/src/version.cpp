@@ -1,4 +1,4 @@
-/* 5512649 */ // sustituiir con los 7 dígitos de la cédula
+/* 5512649 */
 
 #include "../include/version.h"
 #include "../include/linea.h"
@@ -48,13 +48,11 @@ Version obtenerVersion(Version &version, char *numVersion){
 
 void agregarFilaVersion (Version &version, char* numeroVersion, char *textoFila,unsigned int numLinea){
     Version insertar = obtenerVersion(version, numeroVersion);
-    
-    //FALTA TERMINAR DE IMPLEMENTAR
-    //Verificar como hacer para que no deje huecos
-    if (numLinea < cantidadLineas(insertar->linea) || esVaciaLinea(insertar->linea)){
+
+    if (numLinea <= cantidadLineas(insertar->linea) + 1){
         insertarLinea(insertar->linea, textoFila, numLinea);
     }else{
-        printf("Nopeee");
+        printf("\nNo se pueden dejar huecos entre lineas\n");
     }
     
 }
@@ -62,6 +60,8 @@ void agregarFilaVersion (Version &version, char* numeroVersion, char *textoFila,
 void imprimirVersion(Version version, char* numeroVersion){
     Version res = obtenerVersion(version, numeroVersion);
     Linea aux = res->linea;
+    if (esVaciaLinea(aux)) printf("No contiene lineas\n");
+    
     int renglon = 1;
     while (!esVaciaLinea(aux)){
         char* A = obtenerTextoLinea(aux, getNumeroLinea(aux));
