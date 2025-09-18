@@ -20,9 +20,6 @@ Version crearVersionVacia(){
     return NULL;
 }
 
-
-
-
 void crearVersion(Version &version, char *num_version){
     if (version == NULL || strcmp(num_version, version->num) < 0)  {
         Version nuevo = new _rep_version;
@@ -81,6 +78,21 @@ char* nombreVersion(Version version){
     return A;
 }
 
+
+
+//Pre-Cond: (!esVaciaVersion(version)) retorna true
+//Pos-Cond: retorna un entero con el numero de la ultima verison que hay en la Version "version"
+
+int numeroUltimaVersion(Version version);
+
+
+
+////////////////////////////////// AGREGADA 16/09/2025  ////////////
+//Pre-Cond: No tiene
+//Pos-Cond: retorna un entero con el numero de la ultima linea de la Verison de "version"
+int numeroUltimaLineaVersion(Version version);
+
+
 bool esVaciaVersion (Version version, char* numeroVersion){
     return version->linea == NULL;
 }
@@ -117,30 +129,3 @@ void destruirTodasLasVersiones(Version &version){
     }
     version = NULL;
 }
-
-
-/*
-void crearVersion (Version &version, char *num_version){
-    if (version == NULL) {
-        Version nueva = new _rep_version();
-        nueva->num = num_version;
-        nueva->nivel = nivelVersion(nueva);
-        nueva->linea = crearLineaVacia();
-        nueva->sig = NULL;
-        nueva->hijo = NULL;
-        version = nueva;
-    } else {
-        crearVersion(version->sig, num_version);
-    }  
-}
-
-
-//FUNCION AUXILIAR
-int nivelVersion(Version version){
-    int cont = 1;
-    for (int i = 0; version->num[i] != '\0'; i++){
-        if (version->num[i] == '.') cont++;       
-    }
-    return cont;
-}
-*/

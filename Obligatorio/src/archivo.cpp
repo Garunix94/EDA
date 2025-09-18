@@ -26,6 +26,17 @@ void crearVersionArchivo (Archivo &archivo, char *numVersion){
 //NO ENTIENDO DIFERENECIA CON FUNCION ANTERIOR
 void versionIndependienteArchivo(Archivo &archivo, char *numVersion);
 
+
+
+
+//******************************* AGREGADA 16/09/1974 ************************
+//Pre-Cond: No tiene
+//Pos-Cond: Retorna un arreglo dinamico con el nombre del Archivo "archivo"
+char* obtenerNombreArchivo(Archivo archivo);
+
+
+
+
 void mostrarVersionesArchivo(Archivo archivo){
     printf("%s\n\n", archivo->nombreArchivo);
     if (archivo->version == NULL){
@@ -49,9 +60,6 @@ void insertarLineaVersionDeArchivo (Archivo &archivo, char* numeroVersion, char 
     agregarFilaVersion(archivo->version, numeroVersion, textoFila, numFila);
 }
 
-void borrarLineaVersionArchivo (Archivo &archivo, char* numeroVersion, unsigned int numFila){
-    eliminarLineaVersion(archivo->version, numeroVersion, numFila);
-}
 
 void imprimirVersionArchivo (Archivo archivo, char* numeroVersion){
     printf("%s\n\n", archivo->nombreArchivo);
@@ -67,7 +75,23 @@ void mostrarTextoArchivoVersion (Archivo archivo, char* numeroVersion){
     imprimirVersion(archivo->version, numeroVersion);
 }
 
-//FALTA IMPLEMENTAR OJOOOO
+
+
+//************************** AGREGADA 16/09/2025   ************************
+//Pre-Cond: No tiene.
+//Pos-Cond: Retorna el numero de la ultima version del Archivo "archivo"
+//			Si no tiene versiones retorna 0
+unsigned int numeroUltimaVersionArchivo (Archivo archivo);
+
+//************************** AGREGADA 16/09/2025   ************************
+//Pre-Cond: Existe la version "nombreVersion" en el Archivo "archivo".
+//Pos-Cond: Retorna el numero de la ultima linea de la Version "nombreVersion"
+unsigned int numeroUltimaLinea (Archivo archivo, char* nombreVersion);
+
+
+
+
+//FALTA IMPLEMENTAR
 bool igualesVersionesArchivo (Archivo archivo, char* numeroVersion1, char* numeroVersion2);
 
 bool existeVersionEnArchivo(Archivo archivo, char* numeroVersion){
@@ -82,4 +106,8 @@ void borrarArchivoCompleto(Archivo &archivo){
 
 void borrarVersionDeArchivo (Archivo &archivo, char* numeroVersion){
     destruirVersion(archivo->version, numeroVersion);
+}
+
+void borrarLineaVersionArchivo (Archivo &archivo, char* numeroVersion, unsigned int numFila){
+    eliminarLineaVersion(archivo->version, numeroVersion, numFila);
 }
