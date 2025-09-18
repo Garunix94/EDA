@@ -30,6 +30,13 @@ void versionIndependienteArchivo(Archivo &archivo, char *numVersion);
 
 //************************ SELECTORAS ********************* */
 
+
+
+//******************************* AGREGADA 16/09/1974 ************************
+//Pre-Cond: No tiene
+//Pos-Cond: Retorna un arreglo dinamico con el nombre del Archivo "archivo"
+char* obtenerNombreArchivo(Archivo archivo);
+
 //Pre-Cond: la version num_version existe en version
 //Pos-Cond: Retorna un puntero a la version de nombre "num_version"
 void mostrarVersionesArchivo(Archivo archivo);
@@ -39,10 +46,6 @@ void mostrarVersionesArchivo(Archivo archivo);
 //          Las filas debajo de num_filas se renumeran como num_fila=num_fila+1
 void insertarLineaVersionDeArchivo (Archivo &archivo, char* numeroVersion, char *textoFila,unsigned int numFila);
 
-//Pre-Cond: la Fila "num_fila" existe en la version "version"
-//Pos-Cond: se elimina la Fila de la posicion "num_fila"
-//          el resto de las Filas debajo se renumeran como num_fila=num_fila-1
-void borrarLineaVersionArchivo (Archivo &archivo, char* numeroVersion, unsigned int numFila);
 
 //Pre-Cond: la version nombre_version existe en Version
 //Pos-Cond: Imprime la Version "nombre_version"
@@ -53,18 +56,29 @@ void imprimirVersionArchivo (Archivo archivo, char* numeroVersion);
 void mostrarCambiosArchivo (Archivo archivo, char* numeroVersion);
 
 
-//***************************** AGREGADA 11/05/2025 *******************
+//***************************** AGREGADA 11/09/2025 *******************
 //Pre-Cond: La Version "numeroVersion" existe en el Archivo "archivo".
 //Pos-Cond: Imprime el texto correspondiente a la version "numeroVersion"
 void mostrarTextoArchivoVersion (Archivo archivo, char* numeroVersion);
 
+//************************** AGREGADA 16/09/2025   ************************
+//Pre-Cond: No tiene.
+//Pos-Cond: Retorna el numero de la ultima version del Archivo "archivo"
+//			Si no tiene versiones retorna 0
+unsigned int numeroUltimaVersionArchivo (Archivo archivo);
+
+//************************** AGREGADA 16/09/2025   ************************
+//Pre-Cond: Existe la version "nombreVersion" en el Archivo "archivo".
+//Pos-Cond: Retorna el numero de la ultima linea de la Version "nombreVersion"
+unsigned int numeroUltimaLinea (Archivo archivo, char* nombreVersion);
+
+
+
+
 //********************* PREDICADOS ************************* */
-
-
 
 //Retorna true si la Version "numeroVersion" existe en "version"
 bool igualesVersionesArchivo (Archivo archivo, char* numeroVersion1, char* numeroVersion2);
-
 
 
 //***********************************AGREGADA 11/09/2025 **********************
@@ -73,11 +87,13 @@ bool igualesVersionesArchivo (Archivo archivo, char* numeroVersion1, char* numer
 bool existeVersionEnArchivo(Archivo archivo, char* numeroVersion);
 
 
+
 //****************  DESTRUCTORAS ***********************
 
 //Pre-Cond: No tiene
 //Pos-Cond: elimina toda la mermoria reservada por "archivo"
 void borrarArchivoCompleto(Archivo &archivo);
+
 
 //Pre-Cond: la version "numeroVersion" existe en version
 //Pos-Cond: elimina toda la mermoria reservada por "numeroVersion"
@@ -85,6 +101,10 @@ void borrarArchivoCompleto(Archivo &archivo);
 void borrarVersionDeArchivo (Archivo &archivo, char* numeroVersion);
 
 
+//Pre-Cond: Existe la Version "numeroVersion" y existe la Linea "numFila" en la Version "numeroVersion"
+//Pos-Cond: se elimina la Fila de la posicion "num_fila"
+//          el resto de las Filas debajo se renumeran como num_fila=num_fila-1
+void borrarLineaVersionArchivo (Archivo &archivo, char* numeroVersion, unsigned int numFila);
 
 
 #endif

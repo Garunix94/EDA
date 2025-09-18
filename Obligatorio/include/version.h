@@ -20,15 +20,17 @@ typedef struct _rep_version *Version;
 //Pos-Cond: Retorna una version vacia
 Version crearVersionVacia();
 
-//Pre-Cond: No existe otra version en la estructura con nombre "nombreVersion"
-//Pos-Cond: Crea una nueva version de 
+//Pre-Cond: num_version tiene que estar en el rango de 1 o la ultima version + 1 de
+//			la Version "version" 
+//Pos-Cond: Crea una nueva version con el numero de verion "num_version
+//			Las versiones iguales y mayores a num_version se les suma 1 al numero de version.
 void crearVersion (Version &version, char *num_version);
 
 
 //************************ SELECTORAS ********************* */
 
-//Pre-Cond: la version numVersion existe en version
-//Pos-Cond: Retorna un puntero a la version de nombre "numVersion"
+//Pre-Cond: la Version "numVersion" existe en version
+//Pos-Cond: Retorna un puntero a la version que tiene como numero "numVersion"
 Version obtenerVersion(Version &version, char *numVersion);
 
 //Pre-cond: La version "version" tiene por lo menos "numLinea" de Lineas
@@ -52,10 +54,24 @@ Version siguienteVersion(Version version);
 char* nombreVersion(Version version);
 
 
+////////////////////////////////// AGREGADA 16/09/2025  ////////////
+//Pre-Cond: (!esVaciaVersion(version)) retorna true
+//Pos-Cond: retorna un entero con el numero de la ultima verison que hay en la Version "version"
+
+int numeroUltimaVersion(Version version);
+
+
+////////////////////////////////// AGREGADA 16/09/2025  ////////////
+//Pre-Cond: No tiene
+//Pos-Cond: retorna un entero con el numero de la ultima linea de la Verison de "version"
+int numeroUltimaLineaVersion(Version version);
+
 //********************* PREDICADOS ************************* */
 
-//Retorna true si la Version "version" no tiene texto
-bool esVaciaVersion (Version version, char* numeroVersion);
+//********** MODIFICADO 15/09/2025******************************
+//pre-cond:No tiene
+//pos-cond:Retorna true si la Version "version" es vacia.
+bool esVaciaVersion (Version version);
 
 //Retorna true si la Version "numeroVersion" existe en "version"
 bool existeVersion (Version version, char* numeroVersion);
@@ -77,14 +93,5 @@ void destruirVersion (Version &version, char* numeroVersion);
 //Pos-Cond: Elimina toda la memoria reservada por "version"
 void destruirTodasLasVersiones(Version &version);
 
-
-
-
-
-//Funciones creadas por mi porque sino seria imposible hacer el obligatorio
-
-//Pre-codicion: No tiene
-//Pos-condicion: Imprime toda la lista de numero de versiones a la que apunta "version"
-void imprimirNumeroVersion(Version version);
 
 #endif
