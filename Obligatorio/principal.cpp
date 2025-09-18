@@ -244,6 +244,7 @@ TipoRet crearVersion(Archivo &a, char * version){
         //Con las funciones del obligatorio 1 no es posible verificar que no deje huevos entre versiones
 }
 
+//OBLIGATORIO 2
 TipoRet borrarVersion(Archivo &a, char * version){
     return NO_IMPLEMENTADA;
 }
@@ -262,6 +263,8 @@ TipoRet insertarLinea(Archivo &a, char * version, char * linea, unsigned int nro
     }
 }
 
+
+//OBLIGATORIO 2
 TipoRet borrarLinea(Archivo &a, char * version, unsigned int nroLinea){
 	return NO_IMPLEMENTADA;
 }
@@ -275,6 +278,9 @@ TipoRet mostrarTexto(Archivo a, char * version){
     }   
 }
 
+
+
+//OBLIGATORIO 2
 TipoRet mostrarCambios(Archivo a, char * version){
 		return NO_IMPLEMENTADA;
 }

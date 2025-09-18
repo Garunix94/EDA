@@ -24,7 +24,7 @@ Version crearVersionVacia(){
 
 
 void crearVersion(Version &version, char *num_version){
-    if (version == NULL || strcmp(num_version, version->num) < 0) {
+    if (version == NULL || strcmp(num_version, version->num) < 0)  {
         Version nuevo = new _rep_version;
         nuevo->num = new char[15];
         strcpy(nuevo->num, num_version);
@@ -54,7 +54,6 @@ void agregarFilaVersion (Version &version, char* numeroVersion, char *textoFila,
     }else{
         printf("\nNo se pueden dejar huecos entre lineas\n");
     }
-    
 }
 
 void imprimirVersion(Version version, char* numeroVersion){
