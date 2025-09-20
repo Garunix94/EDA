@@ -80,7 +80,7 @@ unsigned int numeroUltimaVersionArchivo (Archivo archivo){
     if (esVaciaVersion(archivo->version)){
         return 0;
     }else{
-        return 1 + numeroUltimaVersion(archivo->version);
+        return numeroUltimaVersion(archivo->version);
     }
     
 }

@@ -238,10 +238,15 @@ TipoRet borrarArchivo(Archivo &a){
     return OK;
 }
 
-TipoRet crearVersion(Archivo &a, char * version){ 
-    crearVersionArchivo (a, version);
-    return OK;
-    //Con las funciones del obligatorio 1 no es posible verificar que no deje huevos entre versiones
+TipoRet crearVersion(Archivo &a, char * version){
+    unsigned int v = atoi(version);
+    unsigned int u = numeroUltimaVersionArchivo(a) + 1;
+    if (v <= u){
+        crearVersionArchivo(a, version);
+        return OK;
+    }else{
+        return ERROR;
+    }
 }
 
 //OBLIGATORIO 2
@@ -254,6 +259,8 @@ TipoRet mostrarVersiones(Archivo a){
 	return OK;
 }
 
+
+//FALTA CORREGIR QUE NO DEJE HUECOS ENTRE LINEAS DESDE ACA
 TipoRet insertarLinea(Archivo &a, char * version, char * linea, unsigned int nroLinea){ 
 	if (existeVersionEnArchivo(a, version)){
         insertarLineaVersionDeArchivo(a, version, linea, nroLinea);

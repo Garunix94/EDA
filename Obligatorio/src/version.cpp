@@ -22,14 +22,28 @@ Version crearVersionVacia(){
 }
 
 void crearVersion(Version &version, char *num_version){
-    if (version == NULL || strcmp(num_version, version->num) < 0)  {
+    if (version == NULL || strcmp(num_version, version->num) == 0)  {
         Version nuevo = new _rep_version;
         nuevo->num = new char[15];
         strcpy(nuevo->num, num_version);
         nuevo->linea = crearLineaVacia();
         nuevo->sig = version;
         nuevo->hijo = NULL;
-        version = nuevo;
+        if (version == NULL || strcmp(version->num, nuevo->num) == 0){
+            version = nuevo;
+        }
+        if (nuevo->sig != NULL && strcmp(num_version,nuevo->sig->num) == 0){
+            nuevo = nuevo->sig;
+            while (nuevo != NULL){
+                unsigned int valor = atoi(nuevo->num);
+                valor++;
+                char* string = new char[10];
+                sprintf(string, "%d", valor);nuevo->num++;
+                strcpy(nuevo->num,string);
+                nuevo = nuevo->sig;
+            }
+        }
+        
     }else{
         crearVersion(version->sig, num_version);
     }
@@ -93,7 +107,7 @@ int numeroUltimaLineaVersion(Version version){
 }
 
 bool esVaciaVersion (Version version){
-    return version->linea == NULL;
+    return version == NULL;
 }
 
 bool existeVersion (Version version, char* numeroVersion){
