@@ -238,10 +238,10 @@ TipoRet borrarArchivo(Archivo &a){
     return OK;
 }
 
-TipoRet crearVersion(Archivo &a, char * version){
-        crearVersionArchivo (a, version);
-        return OK;
-        //Con las funciones del obligatorio 1 no es posible verificar que no deje huevos entre versiones
+TipoRet crearVersion(Archivo &a, char * version){ 
+    crearVersionArchivo (a, version);
+    return OK;
+    //Con las funciones del obligatorio 1 no es posible verificar que no deje huevos entre versiones
 }
 
 //OBLIGATORIO 2

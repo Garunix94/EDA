@@ -4,6 +4,7 @@
 #include "../include/linea.h"
 #include <time.h>
 #include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 
@@ -78,22 +79,20 @@ char* nombreVersion(Version version){
     return A;
 }
 
+int numeroUltimaVersion(Version version){
+    if (esVaciaVersion(siguienteVersion(version))){
+        return atoi(nombreVersion(version));
+    } else {
+        return numeroUltimaVersion(siguienteVersion(version));
+    }
+}
 
 
-//Pre-Cond: (!esVaciaVersion(version)) retorna true
-//Pos-Cond: retorna un entero con el numero de la ultima verison que hay en la Version "version"
+int numeroUltimaLineaVersion(Version version){
+    return cantidadLineas(version->linea);
+}
 
-int numeroUltimaVersion(Version version);
-
-
-
-////////////////////////////////// AGREGADA 16/09/2025  ////////////
-//Pre-Cond: No tiene
-//Pos-Cond: retorna un entero con el numero de la ultima linea de la Verison de "version"
-int numeroUltimaLineaVersion(Version version);
-
-
-bool esVaciaVersion (Version version, char* numeroVersion){
+bool esVaciaVersion (Version version){
     return version->linea == NULL;
 }
 
@@ -129,3 +128,4 @@ void destruirTodasLasVersiones(Version &version){
     }
     version = NULL;
 }
+
