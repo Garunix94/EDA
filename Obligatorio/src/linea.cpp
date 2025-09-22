@@ -15,6 +15,7 @@ Linea crearLineaVacia(){
     return NULL;
 }
 
+
 void insertarLinea(Linea &linea, char* texto, unsigned int numLinea){
     Linea nueva = new _rep_linea();
     nueva->numLinea = numLinea;
@@ -50,7 +51,7 @@ void insertarLinea(Linea &linea, char* texto, unsigned int numLinea){
                 aux = aux->sig;
             }
         } else {
-            nueva->sig = aux->sig;
+            nueva->sig = aux;
             nueva->ant = aux->ant;
             aux->ant->sig = nueva;
             aux->ant = nueva;

@@ -60,12 +60,7 @@ Version obtenerVersion(Version &version, char *numVersion){
 
 void agregarFilaVersion (Version &version, char* numeroVersion, char *textoFila,unsigned int numLinea){
     Version insertar = obtenerVersion(version, numeroVersion);
-
-    if (numLinea <= cantidadLineas(insertar->linea) + 1){
-        insertarLinea(insertar->linea, textoFila, numLinea);
-    }else{
-        printf("\nNo se pueden dejar huecos entre lineas\n");
-    }
+    insertarLinea(insertar->linea, textoFila, numLinea);
 }
 
 void imprimirVersion(Version version, char* numeroVersion){
