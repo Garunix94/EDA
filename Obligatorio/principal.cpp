@@ -1,4 +1,4 @@
-/* 5512649 */ // sustituir con los 7 dígitos de la cédula
+/* 5512649 */
 
 /* Módulo principal de la tarea de EDA
 
