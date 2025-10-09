@@ -142,11 +142,10 @@ void destruirLinea(Linea &linea){
     Linea aux;
     Linea borrar;
     aux = linea;
-    while (aux->sig != NULL) aux = aux->sig;
     while (aux != NULL){
         borrar = aux;
+        aux = aux->sig;
         destruirCadena(borrar->cadena);
-        aux =aux->ant;
         delete borrar;
     }
     linea = NULL;
