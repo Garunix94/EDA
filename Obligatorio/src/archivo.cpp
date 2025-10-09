@@ -7,6 +7,8 @@
 #include "../include/version.h"
 
 
+
+//MEJOR DEFINIR ESTE STRUCT COMO UNA FILA CON INICIO Y FINAL
 struct _rep_archivo {
     char * nombreArchivo;
     Version version;
