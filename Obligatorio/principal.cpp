@@ -260,7 +260,6 @@ TipoRet mostrarVersiones(Archivo a){
 }
 
 
-//FALTA CORREGIR QUE NO DEJE HUECOS ENTRE LINEAS DESDE ACA
 TipoRet insertarLinea(Archivo &a, char * version, char * linea, unsigned int nroLinea){ 
 	if (existeVersionEnArchivo(a, version) && (numeroUltimaLinea(a, version) + 1) >= nroLinea){
         insertarLineaVersionDeArchivo(a, version, linea, nroLinea);

@@ -43,7 +43,6 @@ void crearVersion(Version &version, char *num_version){
                 nuevo = nuevo->sig;
             }
         }
-        
     }else{
         crearVersion(version->sig, num_version);
     }
