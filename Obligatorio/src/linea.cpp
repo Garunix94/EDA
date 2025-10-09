@@ -15,7 +15,6 @@ Linea crearLineaVacia(){
     return NULL;
 }
 
-
 void insertarLinea(Linea &linea, char* texto, unsigned int numLinea){
     Linea nueva = new _rep_linea();
     nueva->numLinea = numLinea;

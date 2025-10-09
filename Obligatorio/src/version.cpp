@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 struct _rep_version {
     char * num;
     Linea linea;
@@ -43,6 +42,7 @@ void crearVersion(Version &version, char *num_version){
                 nuevo = nuevo->sig;
             }
         }
+        
     }else{
         crearVersion(version->sig, num_version);
     }
@@ -94,7 +94,6 @@ int numeroUltimaVersion(Version version){
         return numeroUltimaVersion(siguienteVersion(version));
     }
 }
-
 
 int numeroUltimaLineaVersion(Version version){
     return cantidadLineas(version->linea);
