@@ -19,11 +19,105 @@ struct _rep_version {
 
 
 
+//Funciones auxiliares
+
+int nivelVersion(char * num){
+    int cont = 1;
+    for (int i = 0; num[i] != '\0'; i++) {
+        if (num[i] == '.'){
+            cont++;
+        }
+    }
+    return cont;
+}
+
+char* cabezaVersion(char* num) {
+    int i = 0;
+    while (num[i] != '.') {
+        i++;
+    }
+    char* cabeza = new char[i + 1];
+    for (int j = 0; j < i; j++) {
+        cabeza[j] = num[j];
+    }
+    cabeza[i] = '\0';
+    return cabeza;
+}
+
+void crearNivelPrincipal(Version &version, char *num_version){
+    if (version == NULL || strcmp(num_version, version->num) == 0){
+        Version nuevo = new _rep_version;
+        nuevo->num = new char[15];
+        strcpy(nuevo->num, num_version);
+        nuevo->nivel = 1;
+        nuevo->linea = crearLineaVacia();
+        nuevo->sig = version;
+        nuevo->hermano = NULL;
+        nuevo->hijo = NULL;
+        nuevo->padre = NULL;
+        if (version == NULL || strcmp(version->num, nuevo->num) == 0){
+            version = nuevo;
+        }
+        if (nuevo->sig != NULL && strcmp(num_version,nuevo->sig->num) == 0){
+            nuevo = nuevo->sig;
+            while (nuevo != NULL){
+                unsigned int valor = atoi(nuevo->num);
+                valor++;
+                char* string = new char[10];
+                sprintf(string, "%d", valor);nuevo->num++;
+                strcpy(nuevo->num,string);
+                nuevo = nuevo->sig;
+            }
+        }
+    }else{
+        crearNivelPrincipal(version->sig, num_version);
+    }
+}
+
+void crearSubVersion(Version &version, char *num_version){
+    Version nuevo = new _rep_version;
+    nuevo->num = new char[15];
+    strcpy(nuevo->num, num_version);
+    nuevo->nivel = nivelVersion(num_version);
+    nuevo->linea = crearLineaVacia(); //Aca se copiaria la linea de la version anterior
+    nuevo->sig = NULL;
+    nuevo->hermano = NULL;
+    nuevo->hijo = NULL;
+    nuevo->padre = NULL;
+    if (version->hijo == NULL) {
+        version->hijo = nuevo;
+    }else{
+        Version aux = version->hijo;
+        while (aux->sig != NULL) {
+            aux = aux->sig;
+        }
+        aux->sig = nuevo; //Despues ver el caso en que se inserta una version y sustituye
+    }
+}
+
+
+void imprimirArbol(Version AB){
+
+}
+
+
+//FIN funciones auxiliares
+
+
+
+
+
+
+
+
+
+
+
 Version crearVersionVacia(){
     return NULL;
 }
 
-void crearVersion(Version &version, char *num_version){
+/*void crearVersion(Version &version, char *num_version){
     if (version == NULL || strcmp(num_version, version->num) == 0)  {
         Version nuevo = new _rep_version;
         nuevo->num = new char[15];
@@ -50,6 +144,25 @@ void crearVersion(Version &version, char *num_version){
         crearVersion(version->sig, num_version);
     }
 }
+*/
+
+
+//FUNCION PARA ARBOLES
+void crearVersion(Version &version, char *num_version) {
+    if (nivelVersion(num_version) == 1){
+        crearNivelPrincipal(version, num_version);
+    }else{
+        Version aux = version;
+        while (strcmp (cabezaVersion(num_version), aux->num) != 0){
+            aux = aux->sig;
+        }
+        crearSubVersion(aux, num_version);
+    }
+    
+}
+
+
+
 
 Version obtenerVersion(Version &version, char *numVersion){
     if (strcmp(version->num, numVersion) == 0){
