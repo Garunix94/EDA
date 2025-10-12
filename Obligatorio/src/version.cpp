@@ -9,6 +9,7 @@
 
 struct _rep_version {
     char * num;
+    int nivel;
     Linea linea;
     _rep_version * sig;
     _rep_version * hermano;
