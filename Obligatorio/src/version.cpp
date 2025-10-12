@@ -11,7 +11,9 @@ struct _rep_version {
     char * num;
     Linea linea;
     _rep_version * sig;
+    _rep_version * hermano;
     _rep_version * hijo;
+    _rep_version * padre;
 };
 
 
