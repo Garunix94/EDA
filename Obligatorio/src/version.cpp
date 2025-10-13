@@ -96,9 +96,6 @@ void crearSubVersion(Version &version, char *num_version){
 }
 
 
-void imprimirArbol(Version AB){
-
-}
 
 
 //FIN funciones auxiliares
