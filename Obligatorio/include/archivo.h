@@ -11,7 +11,6 @@
 #ifndef _ARCHIVO_H
 #define _ARCHIVO_H
 
-
 typedef struct _rep_archivo *Archivo;
 
 
@@ -44,12 +43,12 @@ void mostrarVersionesArchivo(Archivo archivo);
 //Pre-cond: La version "version" tiene por lo menos "num_fila" de Filas
 //Pos-Cond: Agrega el string texto como la fila num_fila de la Version "version"
 //          Las filas debajo de num_filas se renumeran como num_fila=num_fila+1
-void insertarLineaVersionDeArchivo (Archivo &archivo, char* numeroVersion, char *textoFila,unsigned int numFila);
+void insertarLineaVersionDeArchivo (Archivo &archivo, int * numeroVersion, char *textoFila,unsigned int numFila);
 
 
 //Pre-Cond: la version nombre_version existe en Version
 //Pos-Cond: Imprime la Version "nombre_version"
-void imprimirVersionArchivo (Archivo archivo, char* numeroVersion);
+void imprimirVersionArchivo (Archivo archivo, int * numeroVersion);
 
 //Pre-Cond: Tiene version padre.
 //Pos-Cond: Imprime los cambios realizados en la version numeroVersion con respecto al padre.
@@ -59,7 +58,7 @@ void mostrarCambiosArchivo (Archivo archivo, char* numeroVersion);
 //***************************** AGREGADA 11/09/2025 *******************
 //Pre-Cond: La Version "numeroVersion" existe en el Archivo "archivo".
 //Pos-Cond: Imprime el texto correspondiente a la version "numeroVersion"
-void mostrarTextoArchivoVersion (Archivo archivo, char* numeroVersion);
+void mostrarTextoArchivoVersion (Archivo archivo, int * numeroVersion);
 
 //************************** AGREGADA 16/09/2025   ************************
 //Pre-Cond: No tiene.
@@ -70,7 +69,7 @@ unsigned int numeroUltimaVersionArchivo (Archivo archivo);
 //************************** AGREGADA 16/09/2025   ************************
 //Pre-Cond: Existe la version "nombreVersion" en el Archivo "archivo".
 //Pos-Cond: Retorna el numero de la ultima linea de la Version "nombreVersion"
-unsigned int numeroUltimaLinea (Archivo archivo, char* nombreVersion);
+unsigned int numeroUltimaLinea (Archivo archivo, int * nombreVersion);
 
 
 
@@ -84,7 +83,7 @@ bool igualesVersionesArchivo (Archivo archivo, char* numeroVersion1, char* numer
 //***********************************AGREGADA 11/09/2025 **********************
 //Pre-Cond: No tiene
 //Pos-Cond: Retorna true si la Version "numeroVersion" existe en el Archivo "archivo"
-bool existeVersionEnArchivo(Archivo archivo, char* numeroVersion);
+bool existeVersionEnArchivo(Archivo archivo, int * numeroVersion);
 
 
 
@@ -98,13 +97,18 @@ void borrarArchivoCompleto(Archivo &archivo);
 //Pre-Cond: la version "numeroVersion" existe en version
 //Pos-Cond: elimina toda la mermoria reservada por "numeroVersion"
 //          y sus sub-versiones del Archivo "archivo"
-void borrarVersionDeArchivo (Archivo &archivo, char* numeroVersion);
+void borrarVersionDeArchivo (Archivo &archivo, int * numeroVersion);
 
 
 //Pre-Cond: Existe la Version "numeroVersion" y existe la Linea "numFila" en la Version "numeroVersion"
 //Pos-Cond: se elimina la Fila de la posicion "num_fila"
 //          el resto de las Filas debajo se renumeran como num_fila=num_fila-1
-void borrarLineaVersionArchivo (Archivo &archivo, char* numeroVersion, unsigned int numFila);
+void borrarLineaVersionArchivo (Archivo &archivo, int * numeroVersion, unsigned int numFila);
+
+
+void pasarCharNumero(char* version, int numeros[4]);
+
+
 
 
 #endif

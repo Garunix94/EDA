@@ -12,6 +12,8 @@ Laboratorio de EDA 2025 UTU - LATU - Turno Nocturno
 Profesor Ing. Ferando Arrieta
 
 */
+
+
 //*********************  DIRECTIVAS DE PRE-PROCESAMIENTO *************
 #include "include/archivo.h"
 #include "include/utils.h"
@@ -233,13 +235,17 @@ Archivo crearArchivo(char * nombre){
 	return nuevo;
 }
 
+
+
 TipoRet borrarArchivo(Archivo &a){
 	borrarArchivoCompleto(a);
     return OK;
 }
 
 TipoRet crearVersion(Archivo &a, char * version){
-    unsigned int v = atoi(version);
+    int V[4] = {0,0,0,0};
+    pasarCharNumero(version, V);
+    unsigned int v = V[0];
     unsigned int u = numeroUltimaVersionArchivo(a) + 1;
     if (v <= u){
         crearVersionArchivo(a, version);
@@ -261,12 +267,13 @@ TipoRet mostrarVersiones(Archivo a){
 
 
 TipoRet insertarLinea(Archivo &a, char * version, char * linea, unsigned int nroLinea){ 
-	if (existeVersionEnArchivo(a, version) && (numeroUltimaLinea(a, version) + 1) >= nroLinea){
+	/*if (existeVersionEnArchivo(a, version) && (numeroUltimaLinea(a, version) + 1) >= nroLinea){
         insertarLineaVersionDeArchivo(a, version, linea, nroLinea);
         return OK;
     } else {
         return ERROR;
-    }
+    }*/
+   return NO_IMPLEMENTADA;
 }
 
 
@@ -276,14 +283,15 @@ TipoRet borrarLinea(Archivo &a, char * version, unsigned int nroLinea){
 }
 
 TipoRet mostrarTexto(Archivo a, char * version){
-	if (existeVersionEnArchivo(a, version)){
-        mostrarTextoArchivoVersion(a, version);
+    int numeroOk[4];
+    pasarCharNumero(version, numeroOk);
+	if (existeVersionEnArchivo(a, numeroOk)){
+        mostrarTextoArchivoVersion(a, numeroOk);
         return OK;
     } else{
         return ERROR;
     }   
 }
-
 
 
 //OBLIGATORIO 2
@@ -298,3 +306,5 @@ TipoRet iguales(Archivo a, char * version1, char * version2, bool &iguales){
 TipoRet versionIndependiente(Archivo &a, char * version){
 	   return NO_IMPLEMENTADA;
 }
+
+

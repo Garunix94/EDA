@@ -6,13 +6,11 @@
 #include "../include/archivo.h"
 #include "../include/version.h"
 
-
-
-//MEJOR DEFINIR ESTE STRUCT COMO UNA FILA CON INICIO Y FINAL
 struct _rep_archivo {
     char * nombreArchivo;
     Version version;
 };
+
 
 
 Archivo crearArchivoVacio(char *nomArchivo){
@@ -22,10 +20,36 @@ Archivo crearArchivoVacio(char *nomArchivo){
     return nuevo;
 }
 
-void crearVersionArchivo (Archivo &archivo, char *numVersion){
-    crearVersion(archivo->version, numVersion);
+int nivelVersion(char* version) {
+    int nivel = 1; // empezamos en 1
+    for (int i = 0; version[i] != '\0'; i++) {
+        if (version[i] == '.') {
+            nivel++;
+        }
+    }
+    return nivel;
 }
 
+void pasarCharNumero(char* version, int numeros[4]) {
+    int pos = 0;
+    for (int i = 0; version[i] != '\0' && pos < 4; i++) {
+        if (version[i] >= '0' && version[i] <= '9') {
+            numeros[pos] = version[i] - '0';
+            pos++;
+        }
+    }
+    // completar con 0 si quedaron posiciones vacías o ver si mejor con \0
+    for (; pos < 4; pos++)numeros[pos] = 0;
+}
+
+
+
+void crearVersionArchivo (Archivo &archivo, char * numVersion){
+    int nivel = nivelVersion(numVersion);
+    int num[4];
+    pasarCharNumero(numVersion, num);
+    crearVersion(archivo->version, num, nivel);
+}
 
 
 
@@ -38,33 +62,25 @@ char* obtenerNombreArchivo(Archivo archivo){
     return A;
 }
 
+
 void mostrarVersionesArchivo(Archivo archivo){
     printf("%s\n\n", archivo->nombreArchivo);
-    if (archivo->version == NULL){
+    if (!existeArbol(archivo->version)){
         printf("No hay versiones creadas\n");
     } else {
-        Version aux = archivo->version;
-        while (aux != NULL){
-            char* A = nombreVersion(aux);
-            for (int i = 0; A[i] != '\0'; i++){
-                if (A[i] == '.'){
-                    printf("    ");
-                }
-            }    
-            printf("%s\n", nombreVersion(aux));
-            aux = siguienteVersion(aux);
-        }
+        imprimirNumeroVersiones(archivo->version);   
     }
 }
 
-void insertarLineaVersionDeArchivo (Archivo &archivo, char* numeroVersion, char *textoFila,unsigned int numFila){
+void insertarLineaVersionDeArchivo (Archivo &archivo, int * numeroVersion, char *textoFila, unsigned int numFila){
     agregarFilaVersion(archivo->version, numeroVersion, textoFila, numFila);
 }
 
-void imprimirVersionArchivo (Archivo archivo, char* numeroVersion){
+void imprimirVersionArchivo (Archivo archivo, int * numeroVersion){
     printf("%s\n\n", archivo->nombreArchivo);
     imprimirVersion(archivo->version, numeroVersion);
 }
+
 
 
 
@@ -72,22 +88,31 @@ void imprimirVersionArchivo (Archivo archivo, char* numeroVersion){
 //IMPLEMENTAR EN EL SEGUNDO OBLIGATORIO
 void mostrarCambiosArchivo (Archivo archivo, char* numeroVersion);
 
-void mostrarTextoArchivoVersion (Archivo archivo, char* numeroVersion){
-    Version num = obtenerVersion(archivo->version, numeroVersion);
-    printf("%s - %s\n\n", archivo->nombreArchivo, nombreVersion(num));
+
+
+
+void mostrarTextoArchivoVersion (Archivo archivo, int * numeroVersion){
+    printf("%s - %d.%d.%d", archivo->nombreArchivo, numeroVersion[1], numeroVersion[2], numeroVersion[3]);
     imprimirVersion(archivo->version, numeroVersion);
 }
 
+
+
 unsigned int numeroUltimaVersionArchivo (Archivo archivo){
-    if (esVaciaVersion(archivo->version)){
-        return 0;
-    }else{
-        return numeroUltimaVersion(archivo->version);
+    Version aux = archivo->version;
+    unsigned int num = 0;
+    while (aux != NULL && existeArbol(aux)){
+        aux = hijoVersion(aux);
+        num++;
     }
-    
+    return num;
 }
 
-unsigned int numeroUltimaLinea (Archivo archivo, char* nombreVersion){
+
+
+
+
+unsigned int numeroUltimaLinea (Archivo archivo, int * nombreVersion){
     Version aux = obtenerVersion(archivo->version, nombreVersion);
     return numeroUltimaLineaVersion(aux);
 }
@@ -98,7 +123,7 @@ unsigned int numeroUltimaLinea (Archivo archivo, char* nombreVersion){
 //FALTA IMPLEMENTAR
 bool igualesVersionesArchivo (Archivo archivo, char* numeroVersion1, char* numeroVersion2);
 
-bool existeVersionEnArchivo(Archivo archivo, char* numeroVersion){
+bool existeVersionEnArchivo(Archivo archivo, int * numeroVersion){
     return existeVersion(archivo->version, numeroVersion);
 }
 
@@ -108,12 +133,18 @@ void borrarArchivoCompleto(Archivo &archivo){
     archivo = NULL;
 }
 
-void borrarVersionDeArchivo (Archivo &archivo, char* numeroVersion){
+void borrarVersionDeArchivo (Archivo &archivo, int * numeroVersion){
     destruirVersion(archivo->version, numeroVersion);
 }
 
-void borrarLineaVersionArchivo (Archivo &archivo, char* numeroVersion, unsigned int numFila){
+void borrarLineaVersionArchivo (Archivo &archivo, int * numeroVersion, unsigned int numFila){
     eliminarLineaVersion(archivo->version, numeroVersion, numFila);
 }
+
+
+
+
+
+
 
 

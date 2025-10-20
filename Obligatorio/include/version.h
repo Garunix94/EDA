@@ -11,7 +11,6 @@
 #ifndef _VERSION_H
 #define _VERSION_H
 
-
 typedef struct _rep_version *Version;
 
 
@@ -24,34 +23,41 @@ Version crearVersionVacia();
 //			la Version "version" 
 //Pos-Cond: Crea una nueva version con el numero de verion "num_version
 //			Las versiones iguales y mayores a num_version se les suma 1 al numero de version.
-void crearVersion (Version &version, char *num_version);
+void crearVersion(Version &version, int * num_version, int nivel);
 
 
 //************************ SELECTORAS ********************* */
 
 //Pre-Cond: la Version "numVersion" existe en version
 //Pos-Cond: Retorna un puntero a la version que tiene como numero "numVersion"
-Version obtenerVersion(Version &version, char *numVersion);
+Version obtenerVersion(Version version, int * numVersion);
 
 //Pre-cond: La version "version" tiene por lo menos "numLinea" de Lineas
 //Pos-Cond: Agrega el string texto como la fila num_fila de la Version "version"
 //          Las filas debajo de num_filas se renumeran como numLinea=numLinea+1
-void agregarFilaVersion (Version &version, char* numeroVersion, char *textoFila,unsigned int numLinea);
+void agregarFilaVersion (Version &version, int * numeroVersion, char *textoFila,unsigned int numLinea);
 
 //Pre-Cond: existeVersion(version, numeroVersion) retorna true.
 //Pos-Cond: Imprime la Version "nombreVersion"
-void imprimirVersion(Version version, char* numeroVersion);
+void imprimirVersion(Version version, int * numeroVersion);
+
+
+//Otra de mis funciones
+void imprimirNumeroVersiones(Version version);
 
 
 ////////////////////////////////// AGREGADA 05/09/2025  ////////////
 //Pre-Cond: version != NULL
 //Pos-Cond: retorna un puntero a la siguiente Version de "version"
-Version siguienteVersion(Version version);
+Version hermanoVersion(Version version);
+
+//Mi funcion
+Version hijoVersion(Version version);
 
 ////////////////////////////////// AGREGADA 05/09/2025  ////////////
 //Pre-Cond: version !=NULL
 //Pos-Cond: retorna un puntero a un arreglo dinamico con el numero de la Version "version"
-char* nombreVersion(Version version);
+int* nombreVersion(Version version);
 
 
 ////////////////////////////////// AGREGADA 16/09/2025  ////////////
@@ -74,24 +80,31 @@ int numeroUltimaLineaVersion(Version version);
 bool esVaciaVersion (Version version);
 
 //Retorna true si la Version "numeroVersion" existe en "version"
-bool existeVersion (Version version, char* numeroVersion);
+bool existeVersion (Version version, int * numeroVersion);
+
+
+bool sonIguales(int * a, int * b);
+
+bool existeArbol(Version version);
+
 
 //****************  DESTRUCTORAS ***********************
 
 //Pre-Cond: la Linea "numLinea" existe en la version "version"
 //Pos-Cond: se elimina la Linea de la posicion "numLinea"
 //          el resto de las Lineas debajo se renumeran como numLinea=numLinea-1
-void eliminarLineaVersion (Version &version, char* numeroVersion, unsigned int numLinea);
+void eliminarLineaVersion (Version &version, int * numeroVersion, unsigned int numLinea);
 
 //Pre-Cond: la version "numeroVersion" existe en version
 //Pos-Cond: elimina toda la mermoria reservada por "numeroVersion"
 //          y sus sub-versiones.
-void destruirVersion (Version &version, char* numeroVersion);
+void destruirVersion (Version &version, int * numeroVersion);
 
 ////////////////////////////////// AGREGADA 05/09/2025  ////////////
 //Pre-Cond: No tiene
 //Pos-Cond: Elimina toda la memoria reservada por "version"
 void destruirTodasLasVersiones(Version &version);
+
 
 
 #endif
