@@ -26,6 +26,9 @@ Version crearVersionVacia();
 void crearVersion(Version &version, int * num_version, int nivel);
 
 
+void activarVersion(Version version, int v);
+
+
 //************************ SELECTORAS ********************* */
 
 //Pre-Cond: la Version "numVersion" existe en version

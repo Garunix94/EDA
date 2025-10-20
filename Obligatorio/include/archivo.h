@@ -27,6 +27,9 @@ void crearVersionArchivo (Archivo &archivo, char *numVersion);
 //Pos-Cond: Crea una nueva version de
 void versionIndependienteArchivo(Archivo &archivo, char *numVersion);
 
+
+void activarVersion(Archivo archivo, unsigned int v);
+
 //************************ SELECTORAS ********************* */
 
 

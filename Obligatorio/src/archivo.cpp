@@ -42,13 +42,19 @@ void pasarCharNumero(char* version, int numeros[4]) {
     for (; pos < 4; pos++)numeros[pos] = 0;
 }
 
+void activarVersion(Archivo archivo, unsigned int v){
+    int vn = v;
+    activarVersion(archivo->version, vn);
 
+}
 
 void crearVersionArchivo (Archivo &archivo, char * numVersion){
     int nivel = nivelVersion(numVersion);
-    int num[4];
-    pasarCharNumero(numVersion, num);
-    crearVersion(archivo->version, num, nivel);
+    if (nivel > 1){
+        int num[4];
+        pasarCharNumero(numVersion, num);
+        crearVersion(archivo->version, num, nivel);
+    }
 }
 
 

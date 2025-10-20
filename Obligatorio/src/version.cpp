@@ -92,7 +92,12 @@ bool existeArbol(Version version){
     return version->existe == true;
 }
 
-
+void activarVersion(Version version, int v){
+    while (version->num[0] != v){
+        version = version->pH;
+    }
+    version->existe = true;
+}
 
 //Los inserta pero no mueve versiones de lugar
 void crearVersion(Version &version, int *num_version, int nivel) {

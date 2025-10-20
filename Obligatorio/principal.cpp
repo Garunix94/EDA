@@ -248,6 +248,7 @@ TipoRet crearVersion(Archivo &a, char * version){
     unsigned int v = V[0];
     unsigned int u = numeroUltimaVersionArchivo(a) + 1;
     if (v <= u){
+        activarVersion(a, v);
         crearVersionArchivo(a, version);
         return OK;
     }else{
