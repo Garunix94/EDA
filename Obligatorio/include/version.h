@@ -26,6 +26,9 @@ Version crearVersionVacia();
 void crearVersion(Version &version, int * num_version, int nivel);
 
 
+void crearVersionDummy(Version &version, int *num_version);
+
+
 void activarVersion(Version version, int v);
 
 
@@ -34,6 +37,11 @@ void activarVersion(Version version, int v);
 //Pre-Cond: la Version "numVersion" existe en version
 //Pos-Cond: Retorna un puntero a la version que tiene como numero "numVersion"
 Version obtenerVersion(Version version, int * numVersion);
+
+
+Version obtenerVersionDummy(Version version,int * num);
+
+
 
 //Pre-cond: La version "version" tiene por lo menos "numLinea" de Lineas
 //Pos-Cond: Agrega el string texto como la fila num_fila de la Version "version"

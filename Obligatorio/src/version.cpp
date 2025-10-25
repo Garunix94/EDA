@@ -45,22 +45,25 @@ void correrVersiones(Version v) {
 Version crearVersionVacia(){
     int k = 1;
     Version puntero = new _rep_version;
+    Version iterador = puntero;
     puntero->pH = NULL;
     puntero->sH = NULL;
     puntero->existe = false;
     puntero->num[0] = k;
-    Version aux = puntero->pH;
+    Version aux = NULL;
 
     while (k < 9){
         k++;
         aux = new _rep_version;
-        puntero->pH = NULL;
-        puntero->sH = NULL;
-        puntero->existe = false;
-        puntero->num[0] = k;
+        aux->pH = NULL;
+        aux->sH = NULL;
+        aux->existe = false;
+        aux->num[0] = k;
+        iterador->pH = aux;
+        iterador = iterador->pH;
         aux = aux->pH;
     }
-    return puntero;
+    return puntero; 
 }
                    
 bool sonIguales(int * a, int * b){
@@ -99,62 +102,21 @@ void activarVersion(Version version, int v){
     version->existe = true;
 }
 
-//Los inserta pero no mueve versiones de lugar
+//PENSAR Y HACER FUNCION PRINCIPAL DEL PROGRAMA
 void crearVersion(Version &version, int *num_version, int nivel) {
-    printf("Aca esta el error\n");
-    // Caso base: el árbol está vacío
-    if (version == NULL) {
-        version = nuevoNodo(num_version, nivel);
-    }
+    printf("holiwis");
+}
 
-    // Si estamos insertando en el mismo nivel
-    if (nivel == version->tope) {
-        Version actual = version;
-        Version anterior = NULL;
-
-        // Buscar la posición donde insertar
-        while (actual != NULL && actual->num[nivel - 1] < num_version[nivel - 1]) {
-            anterior = actual;
-            actual = actual->sH;
-        }
-
-        // Si encontramos una versión igual -> hay que correr las siguientes
-        if (actual != NULL && actual->num[nivel - 1] == num_version[nivel - 1]) {
-            correrVersiones(actual);
-        }
-
-        // Crear nuevo nodo
-        Version nuevo = nuevoNodo(num_version, nivel);
-
-        // Insertar al inicio
-        if (anterior == NULL) {
-            nuevo->sH = version;
-            version = nuevo;
-        } else {
-            nuevo->sH = anterior->sH;
-            anterior->sH = nuevo;
-        }
-        return;
-    }
-
-    // Si el nivel no coincide, bajar al hijo adecuado
-    Version hijo = version->pH;
-    while (hijo != NULL && hijo->num[version->tope] < num_version[version->tope]) {
-        hijo = hijo->sH;
-    }
-
-    // Si no existe el hijo correspondiente, lo creamos
-    if (hijo == NULL || hijo->num[version->tope] > num_version[version->tope]) {
-        // Crear el hijo padre intermedio si falta
-        Version padreNuevo = nuevoNodo(num_version, version->tope + 1);
-        padreNuevo->padre = version;
-        padreNuevo->sH = version->pH;
-        version->pH = padreNuevo;
-        hijo = padreNuevo;
-    }
-
-    // Llamada recursiva
-    crearVersion(hijo, num_version, nivel);
+void crearVersionDummy(Version &version, int *num_version){
+    Version versionK = version->sH;
+    versionK = new _rep_version;
+    versionK->existe = true;
+    versionK->linea = NULL;
+    versionK->num[0] = num_version[0];
+    versionK->padre = NULL;
+    versionK->pH = NULL;
+    versionK->sH = NULL;
+    versionK->tope = 0;
 }
 
 
@@ -173,6 +135,13 @@ Version obtenerVersion(Version version, int*  numVersion){
         else
             return version;
     }
+}
+
+Version obtenerVersionDummy(Version version,int * num){
+    while (version != NULL && version->num[0] != num[0]) {
+        version = version->pH;
+    }
+    return version;
 }
 
 void agregarFilaVersion (Version &version, int * numeroVersion, char *textoFila,unsigned int numLinea){

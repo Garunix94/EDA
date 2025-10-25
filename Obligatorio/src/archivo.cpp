@@ -50,11 +50,17 @@ void activarVersion(Archivo archivo, unsigned int v){
 
 void crearVersionArchivo (Archivo &archivo, char * numVersion){
     int nivel = nivelVersion(numVersion);
+    int * num = new int [4];
+    
     if (nivel > 1){
-        int num[4];
         pasarCharNumero(numVersion, num);
         crearVersion(archivo->version, num, nivel);
+    }else{ //El caso e que crea el nodo dummy      LA FALLA ESTA ACA
+        //Version buscar = obtenerVersionDummy(archivo->version, num);
+        //crearVersionDummy(buscar, num);
     }
+        
+       printf("nada");
 }
 
 
